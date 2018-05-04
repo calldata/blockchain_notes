@@ -53,6 +53,7 @@ bip32协议描述了HD钱包的标准，主密钥，链码，子密钥等的产�
 主密钥和主链码的生成过程伪代码描述：
 
 ```python
+#主密钥
 def generate_master_private_key_and_master_chain_code():
     mnemonic = generate_mnemonic(word_list)
     seed = generate_root_seed(mnemonic, salt)
@@ -61,6 +62,7 @@ def generate_master_private_key_and_master_chain_code():
 
     return master_private_key, master_chain_code
 
+#子密钥，从父密钥、链码和地址索引派生
 def child_key_derivation(parent_private_key, parent_chain_code, index):
     key = hmac-sha512(parent_private_key + parent_chain_code + index)
     child_key, child_chain_code = key[0:256], key[256, 512]
@@ -70,12 +72,31 @@ def child_key_derivation(parent_private_key, parent_chain_code, index):
 
 ## bip44协议
 
-基于 BIP32 的系统，赋予树状结构中的各层特殊的意义。让同一个 seed 可以支援多币种、多帐户等。各层定义如下：
-m / purpose' / coin_type' / account' / change / address_index
-其中的 purporse' 固定是 44'，代表使用 BIP44。而 coin_type' 用来表示不同币种，例如 Bitcoin 就是 0'，Ethereum 是 60'。
+基于bip32协议，bip44 提供了多账号多币种钱包的支持, 定义了钱包的5级树形结构：
+
+`m / purpose' / coin_type' / account' / change / address_index`
+
+
+* purpose: 协议相关的常数44，代表使用 BIP44
+* coin_type: 货币种类，一个主账号可以管理多种货币
+* account: 账户名，用户可以用自己设定
+* change: 常数0表示钱包公开账户，用来接收其他账户的付款；常数1表示交易的找零钱地址，不公开
+* index：子钱包递增地址，32位地址空间
+
+一些例子：
+
+`m / 44' / 0' / 0' / 0 / 0`
+
+`m / 44' / 0' / 0' / 0 / 1`
+
+`m / 44' / 0' / 0' / 1 / 0`
+
+`m / 44' / 0' / 0' / 1 / 1`
 
 
 #### 参考链接：
 
-1. https://github.com/ethereum/EIPs/issues/84
-2. http://ibloodline.com/assets/master-bitcoin/ch05.html
+* https://github.com/ethereum/EIPs/issues/84
+* http://ibloodline.com/assets/master-bitcoin/ch05.html
+* https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+* https://iancoleman.io/bip39/
