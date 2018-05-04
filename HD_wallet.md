@@ -1,7 +1,7 @@
 # HD wallet原理
 
 bip32, bip39, bip44协议已经事实上成为了数字货币钱包的工业标准。bip32描述了HD钱包的各个层级密钥的产生过程。
-bip39方便钱包的备份，bip44实现了钱包的多币种支持。
+bip39方便钱包的备份，bip44实现了钱包的多账号和多币种支持。
 
 ## bip39协议
 
@@ -98,5 +98,7 @@ def child_key_derivation(parent_private_key, parent_chain_code, index):
 
 * https://github.com/ethereum/EIPs/issues/84
 * http://ibloodline.com/assets/master-bitcoin/ch05.html
+* https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
 * https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+* https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 * https://iancoleman.io/bip39/
