@@ -11,7 +11,8 @@ Keyring是对一系列接口的描述，主要完成以下功能：
 - signMessage(address, data) 用对应地址的私钥签名数据
 - exportAccount(address) 导出对应地址的私钥
 
-keyring只是metamask钱包管理用户用户密钥的抽象接口，
+keyring只是metamask钱包管理用户用户密钥的抽象接口，它会监听例如添加新账户，导出账户私钥等事件。钱包里实现对敏感信息的
+加密解密等。
 
 ####参考链接：
 1.https://github.com/MetaMask/KeyringController/blob/master/docs/keyring.md
