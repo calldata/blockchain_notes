@@ -54,9 +54,13 @@ cxFuncs.getStorageArr = function(filter, callback) {
 
 # Question
 
-- imToken钱包的每份助记词只能使用一个地址
+- imToken钱包没有发挥确定性钱包的优势，每份助记词只使用了一个地址，每个地址都需要备份助记词。
 
+# Conclusion
 
-#### 参考链接
+钱包中只需要用户提供一套密码即可，其他用于加密的密钥直接通过KDF函数继承即可。
+
+  
+# Reference
 
 - [What is an Ethereum keystore file?](https://medium.com/@julien.m./what-is-an-ethereum-keystore-file-86c8c5917b97)
