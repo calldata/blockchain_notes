@@ -13,6 +13,7 @@ Passphrase为用户输入的密码, 通过scrypt算法继承出用于AES加密�
 由于我们设计的是基于web的钱包，因此本地存储采用localStorage或者indexedDB的方式。经过调查发现，MyEtherWallet的持久化存储采用浏览器的localStorage：
 
 > etherwallet\app\scripts\cxFuncs.js
+
 ```javascript
 cxFuncs.storage = chrome.storage.sync;
 
